@@ -1,0 +1,50 @@
+.modal-container.hidden{
+    display: none;
+}
+
+.modal-container{
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+}
+
+.modal-container .shadow{
+    position: absolute;
+    inset: 0;
+    background-color: #2222221c; 
+    backdrop-filter: blur(2px); 
+}
+
+.modal{
+    
+    --bg-theme: #fff;
+    width: min(550px, 100% - 1rem);
+    position: relative;
+    z-index: inherit;
+    background-color: var(--bg-theme);
+    animation: drop-in 400ms ease-in-out;
+}
+.dark .modal{
+    --bg-theme: #222;
+}
+
+@keyframes drop-in{
+    0%{
+        transform: translateY(-50vh);
+    }
+    85%{
+        transform: translateY(5vh);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+.modal form{
+    margin-bottom: 0;
+    padding-block: 50px;
+}

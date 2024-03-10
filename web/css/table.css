@@ -1,0 +1,30 @@
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid;
+}
+
+.table th {
+    font-weight: bold;
+}
+
+.table th {
+    height: 48px;
+    padding: 0 16px;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 700;
+}
+
+.table td {
+    padding: 16px;
+    vertical-align: middle;
+}
+
+

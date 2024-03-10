@@ -1,0 +1,81 @@
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 550px;
+    margin-inline: auto;
+    padding: 40px;
+    gap: 1rem;
+    border-radius: 1rem;
+    background-color: #00000001;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.222);
+    margin-bottom: 50px;
+}
+
+form>* {
+    font-family: 'Poppins', sans-serif;
+}
+
+form>div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+form>div label {
+    font-size: 14px;
+}
+
+form>div input:not([type="button"]) {
+    background-color: transparent;
+    border: none;
+    padding: 8px 14px;
+    border-bottom: 1px solid #222;
+    padding-left: 0;
+    outline: none;
+    font-size: 0.95rem;
+}
+.dark form>div input:not([type="button"]) {
+    border-bottom: 1px solid #f2f2f2;
+    color: white;
+}
+
+form>div input[type="submit"] {
+    padding: 12px 20px;
+    background-color: #fcaa18;
+    color: white;
+    font-size: 0.95rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+form div.form-btn-container{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+form div.form-btn-container button{
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+form div.form-btn-container button:nth-child(2){
+    background-color: crimson;
+    color: white;
+}
+
+label {
+    position: relative;
+}
+
+label.required-label::after {
+    content: '*';
+    display: inline-block;
+    margin-left: 3px;
+    color: rgb(187, 4, 74);
+    font-size: 1rem;
+}
