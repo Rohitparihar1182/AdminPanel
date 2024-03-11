@@ -9,9 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @WebServlet(urlPatterns = {"/UpdateUser"})
 public class UpdateUser extends HttpServlet {
@@ -71,13 +69,13 @@ public class UpdateUser extends HttpServlet {
         try (Connection con = Utils.getConnection(); ResultSet rs = Utils.getAdminWithSession(session, con)) {
 
             if (rs.next()) {
-                String name = Objects.requireNonNull(request.getParameter("name"));
-                String branch = Objects.requireNonNull(request.getParameter("branch"));
-                String uid = Objects.requireNonNull(request.getParameter("uid"));
-                String password = Objects.requireNonNull(request.getParameter("password"));
-                String confirmPassword = Objects.requireNonNull(request.getParameter("confirm-password"));
+                String name = request.getParameter("name");
+                String branch = request.getParameter("branch");
+                String uid = request.getParameter("uid");
+                String password = request.getParameter("password");
+                String confirmPassword = request.getParameter("confirm-password");
 
-                if (name.isEmpty() || branch.isEmpty() || uid.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                if (name == null || branch == null || uid == null || password == null || confirmPassword == null) {
                     request.setAttribute("message", "Cannot find required parameters.");
                     errorDispatcher.forward(request, response);
                     return;  
@@ -95,7 +93,7 @@ public class UpdateUser extends HttpServlet {
                     ps.setString(2, branch);
                     ps.setString(3, password);
                     ps.setBoolean(4, request.getParameter("hostel") != null);
-                    ps.setString(5, uid.toLowerCase());
+                    ps.setString(5, uid);
 
                     int rowsAffected = ps.executeUpdate();
 
