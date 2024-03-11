@@ -10,8 +10,9 @@ const ANIMATION_DURATION = 400;
 deleteUserBtns.forEach(btn => {
     btn.addEventListener('click' , (e) => {
         handleOpenModal();
-        console.log(btn.getAttribute("data-uid"));
         deleteAccForm.setAttribute("data-uid", btn.getAttribute("data-uid"));
+        const newText = `Are you sure(DELETE-${btn.getAttribute("data-uid")})`;
+//        deleteAccForm.querySelector("h2").textContent = `<span>${newText}</span>`;
         deleteAccBtn.addEventListener('click', () => {
             handleDeleteAcc();
         });

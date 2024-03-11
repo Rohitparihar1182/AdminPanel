@@ -72,7 +72,8 @@
                                 out.println("<td>"+isHostel+"</td>");
                                 out.println("<td>");
                                 out.println("<div class='actions'>");
-                                out.println("<button type='button' class='edit-user'><img src='./assets/edit-icon.png' alt='edit user' title='edit user'></button>");
+//                                out.println("<button type='button' class='edit-user'><img src='./assets/edit-icon.png' alt='edit user' title='edit user'></button>");
+                                out.println("<a href='/AdminPanel/UpdateUser?uid="+uids.get(i)+"' class='edit-user'><img src='./assets/edit-icon.png' alt='edit user' title='edit user'></a>");
                                 out.println("<button type='button' data-uid=" + uids.get(i) +" class='delete-user'><img src='./assets/delete-icon.jpg' alt='delete user' title='delete user'></button>");
                                 out.println("</div>");
                                 out.println("</td>");

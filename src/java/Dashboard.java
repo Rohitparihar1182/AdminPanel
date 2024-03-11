@@ -22,6 +22,7 @@ public class Dashboard extends HttpServlet {
         if(session == null) {
             request.setAttribute("message", "Session not found");
             errorDispatcher.forward(request, response);
+            return;
         }
 
         try{

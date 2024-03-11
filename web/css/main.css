@@ -282,11 +282,53 @@ section {
     align-items: center;
 }
 
-.actions > button{
+.actions > button, .actions > a{
     width: 24px;
     border: none;
     outline: none;
     background: none;
     padding: 0;
     cursor: pointer;
+    text-decoration: none;
+}
+
+/* Quick links styles*/
+
+.quick-links{
+    --_bg: #f2f2f2;
+    --_clr: #222;
+    margin-top: 20px;
+}
+
+.dark .quick-links{
+    --_bg: #353535;
+    --_clr: #f2f2f2;
+}
+
+.quick-links h3{
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    position: relative;
+    width: fit-content;
+}
+
+.quick-links h3::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    background: currentColor;
+    height: 2px;
+    left: 0;
+    right: 0;
+}
+
+.quick-links a{
+    text-decoration: none;
+    color: var(--_clr);
+    margin-top: 10px;
+    background: var(--_bg);
+    padding: 8px 16px;
+    display: inline-block;
+    margin-right: 18px;
 }

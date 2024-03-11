@@ -18,6 +18,11 @@
         <section>
             <div class="container">
                 <h1 style="text-align: center;"><%= request.getAttribute("message") %></h1>
+                <div class="quick-links">
+                    <h3>Quick Links</h3>
+                    <a href="/AdminPanel/dashboard">Dashboard</a>
+                    <a href="/AdminPanel/login.jsp">Login</a>
+                </div>
             </div>
         </section>
     </body>
