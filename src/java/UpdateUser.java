@@ -1,4 +1,3 @@
-
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -10,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @WebServlet(urlPatterns = {"/UpdateUser"})
 public class UpdateUser extends HttpServlet {
@@ -41,6 +41,7 @@ public class UpdateUser extends HttpServlet {
                     userData.put("branch", user.getString("branch"));
                     userData.put("password", user.getString("password"));
                     userData.put("hostel", user.getBoolean("hostel"));
+                    userData.put("uid", uid);
                     request.setAttribute("user-data", userData);
                     dispatcher.forward(request, response);
                 }
@@ -69,18 +70,17 @@ public class UpdateUser extends HttpServlet {
         try (Connection con = Utils.getConnection(); ResultSet rs = Utils.getAdminWithSession(session, con)) {
 
             if (rs.next()) {
-                String name = request.getParameter("name");
-                String branch = request.getParameter("branch");
-                String uid = request.getParameter("uid");
-                String password = request.getParameter("password");
-                String confirmPassword = request.getParameter("confirm-password");
+                String name = Objects.requireNonNull(request.getParameter("name"));
+                String branch = Objects.requireNonNull(request.getParameter("branch"));
+                String uid = Objects.requireNonNull(request.getParameter("uid"));
+                String password = Objects.requireNonNull(request.getParameter("password"));
+                String confirmPassword = Objects.requireNonNull(request.getParameter("confirm-password"));
 
-                if (name == null || branch == null || uid == null || password == null || confirmPassword == null) {
+                if (name.isEmpty() || branch.isEmpty() || uid.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                     request.setAttribute("message", "Cannot find required parameters.");
                     errorDispatcher.forward(request, response);
                     return;  
                 }
-
                 if (!password.equals(confirmPassword)) {
                     request.setAttribute("message", "Password should match confirm password");
                     errorDispatcher.forward(request, response);

@@ -30,7 +30,7 @@
                         Map<String, Object> userData = (Map<String, Object>) request.getAttribute("user-data");
                     %>
                     <input type="hidden" name="uid" value="<%= userData.getOrDefault("uid", "") %>">
-                    <h2 style="text-align: center; font-size: 32px;">Add User</h2>
+                    <h2 style="text-align: center; font-size: 32px;">Update User</h2>
                     <div class="input-group">
 
                         <label class="required-label" for="name">Name</label>

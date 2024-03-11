@@ -10,7 +10,6 @@ import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
-
 @WebServlet(urlPatterns = {"/dashboard"})
 public class Dashboard extends HttpServlet {
     @Override
