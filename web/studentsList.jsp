@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AdminPanel - Login</title>
+        <title>AdminPanel - Students List</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link
@@ -27,27 +27,6 @@
             .game {
                 margin-bottom: 20px;
             }
-            .game h2 {
-                color: #007BFF;
-                border-bottom: 1px solid #ddd;
-                padding-bottom: 5px;
-            }
-            .students {
-                list-style-type: none;
-                padding: 0;
-            }
-            .students li {
-                margin: 5px 0;
-                padding: 10px;
-                border-radius: 5px;
-                background-color: #f4f4f4;
-                
-            }
-            .dark .students li{
-                background-color: #292929;
-                
-            }
-            
         </style>
     </head>
     <body>
@@ -66,33 +45,44 @@
             </div>
         </section>
         <section>
-            
             <div class="container">
-                <%
-                     Map<String, List<String>> gameRegistrations = (Map<String, List<String>>) request.getAttribute("gamesList");
-                     
-if (gameRegistrations != null && !gameRegistrations.isEmpty()) {
-    for (Map.Entry<String, List<String>> entry : gameRegistrations.entrySet()) {
-        String gameName = entry.getKey();
-        List<String> students = entry.getValue();
-                %>
-                <div class="game">
-                    <h2><%= gameName %></h2>
-                    <ul class="students">
-                        <% for (String student : students) { %>
-                        <li><%= student %></li>
-                            <% } %>
-                    </ul>
-                </div>
-                <%
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>UID</th>
+                            <th>Branch</th>
+                            <!--<th>Action</th>-->
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <%
+                        boolean status = (boolean) request.getAttribute("isSuccess");
+                        if(status){
+                            List<String> names = (List<String>)request.getAttribute("name");
+                            List<String> branches = (List<String>) request.getAttribute("branch");
+                            List<String> uids = (List<String>) request.getAttribute("uid");
+                           
+                            for(int i = 0; i< names.size(); i++){
+                                out.println("<tr>");
+                                out.println("<td>"+names.get(i)+"</td>");
+                                out.println("<td>"+uids.get(i)+"</td>");
+                                out.println("<td>"+branches.get(i)+"</td>");
+                                
+                                out.println("</tr>");
+                            }
+                            
+                        }else{
+                            out.println("<h2>Error fetching student data</h2>");
                         }
-                    } else {
-                %>
-                <p>No games or registered students found.</p>
-                <%
-                    }
-                %>
+         
+                        %>
+
+                    </tbody>
+                </table>
             </div>
+
         </section>
 
 

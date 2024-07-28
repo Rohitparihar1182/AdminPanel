@@ -10,13 +10,14 @@ import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/dashboard"})
-public class Dashboard extends HttpServlet {
+@WebServlet(urlPatterns = {"/studentslist"})
+public class StudentsList extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.getWriter().println("This is the student list page");
         HttpSession session = request.getSession(false);
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("studentList.jsp");
         RequestDispatcher errorDispatcher = request.getRequestDispatcher("error.jsp");
         if(session == null) {
             request.setAttribute("message", "Session not found");
@@ -33,9 +34,20 @@ public class Dashboard extends HttpServlet {
             }
             if(rs.next()){
                 request.setAttribute("adminName", rs.getString("name"));
-                Map<String, List<String>> gamesList = Utils.getRegisteredStudentsForGames(con);
-                request.setAttribute("gamesList", gamesList);
-                request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
+                ResultSet allStudents = Utils.getAllStudents(con);
+                if(allStudents != null ){
+                    
+                    Map<String, List<Object>> result = Utils.convertResultSetToMap(allStudents);
+                    for(Map.Entry<String, List<Object>> entry : result.entrySet()){
+                        request.setAttribute(entry.getKey(), entry.getValue());
+                    }
+                    request.setAttribute("isSuccess", true);
+                    
+                }else{
+                    request.setAttribute("isSuccess", false);
+                }
+                
+                request.getRequestDispatcher("/studentsList.jsp").forward(request, response);
                 dispatcher.forward(request, response);
             }else{
                 request.setAttribute("message", "Invalid session");

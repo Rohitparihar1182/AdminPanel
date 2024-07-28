@@ -28,7 +28,6 @@ public class RegisterUser extends HttpServlet {
                 String uid = request.getParameter("uid");
                 String password = request.getParameter("password");
                 String confirmPassword = request.getParameter("confirm-password");
-                boolean hostel = request.getParameter("hostel") != null;
                 if (name == null || branch == null || uid == null || password == null || confirmPassword == null) {
                     response.sendRedirect("/AdminPanel/register.jsp");
                     return;
@@ -38,13 +37,12 @@ public class RegisterUser extends HttpServlet {
                     return;
                 }
 
-                String insertQuery = "INSERT INTO student(name, uid, branch, password, hostel) VALUES (?, ?, ?, ?, ?)";
+                String insertQuery = "INSERT INTO student(name, uid, branch, password) VALUES (?, ?, ?, ?)";
                 PreparedStatement ps = con.prepareStatement(insertQuery);
                 ps.setString(1, name);
                 ps.setString(2, uid.toLowerCase());
                 ps.setString(3, branch);
                 ps.setString(4, password);
-                ps.setBoolean(5, hostel);
 
                 int rowsAffected = ps.executeUpdate();
 
